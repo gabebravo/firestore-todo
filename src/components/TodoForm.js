@@ -7,7 +7,7 @@ export default function TodoForm({ name, value }) {
   const { createDoc } = React.useContext(FirebaseContext);
 
   const saveTodo = () => {
-    createDoc('todos', form[name]);
+    createDoc({ task: form[name], isComplete: false });
     resetForm();
   };
 

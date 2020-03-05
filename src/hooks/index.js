@@ -38,17 +38,10 @@ export const useFsMethods = collection => {
   const db = firebase.firestore();
   const auth = firebase.auth();
 
-  // WRITE A NEW DOCUMENT TO THE FIRESTORE DB
-  const createDoc = async task => {
-    return await db.collection(collection).add({ task, isComplete: false });
-  };
-
-  // DELETE A DOCUMENT FROM THE FIRESTORE DB
-  const deleteDoc = async id => {
-    return await db
-      .collection(collection)
-      .doc(id)
-      .delete();
+  // CRUD METHODS _____________________________________
+  // CREATE A NEW DOCUMENT TO THE FIRESTORE DB
+  const createDoc = async doc => {
+    return await db.collection(collection).add(doc);
   };
 
   // UPDATE A DOCUMENT IN THE FIRESTORE DB
@@ -59,6 +52,15 @@ export const useFsMethods = collection => {
       .update(updatedDoc);
   };
 
+  // DELETE A DOCUMENT FROM THE FIRESTORE DB
+  const deleteDoc = async id => {
+    return await db
+      .collection(collection)
+      .doc(id)
+      .delete();
+  };
+
+  // AUTH METHODS _____________________________________
   // register method used to add new users
   const register = async (name, email, password) => {
     const newUser = await auth.createUserWithEmailAndPassword(email, password);
