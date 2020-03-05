@@ -34,10 +34,55 @@ export const useFsQuery = collection => {
   return { todos };
 };
 
-export const useFsWrite = () => {
+export const useFsMethods = collection => {
   const db = firebase.firestore();
-  const setDoc = async (collection, task) => {
+  const auth = firebase.auth();
+
+  // WRITE A NEW DOCUMENT TO THE FIRESTORE DB
+  const createDoc = async task => {
     return await db.collection(collection).add({ task, isComplete: false });
   };
-  return { setDoc };
+
+  // DELETE A DOCUMENT FROM THE FIRESTORE DB
+  const deleteDoc = async id => {
+    return await db
+      .collection(collection)
+      .doc(id)
+      .delete();
+  };
+
+  // UPDATE A DOCUMENT IN THE FIRESTORE DB
+  const updateDoc = async (id, updatedDoc) => {
+    return await db
+      .collection(collection)
+      .doc(id)
+      .update(updatedDoc);
+  };
+
+  // register method used to add new users
+  const register = async (name, email, password) => {
+    const newUser = await auth.createUserWithEmailAndPassword(email, password);
+
+    // method will return the promise from the API
+    return await newUser.user.updateProfile({
+      displayName: name
+    });
+  };
+
+  // login method will return the promise from the API
+  const login = async (email, password) => {
+    return await auth.signInWithEmailAndPassword(email, password);
+  };
+
+  // logout method will return the promise from the API
+  const logout = async () => {
+    return await auth.signOut();
+  };
+
+  // reset method will return the promise from the API
+  const resetPassword = async email => {
+    return await auth.sendPasswordResetEmail(email);
+  };
+
+  return { createDoc, updateDoc, deleteDoc };
 };

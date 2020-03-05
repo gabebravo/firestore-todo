@@ -4,10 +4,10 @@ import { FirebaseContext } from './FirebaseWrapper';
 
 export default function TodoForm({ name, value }) {
   const { form, changeHandler, resetForm } = useForm(name, value);
-  const { setDoc } = React.useContext(FirebaseContext);
+  const { createDoc } = React.useContext(FirebaseContext);
 
   const saveTodo = () => {
-    setDoc('todos', form[name]);
+    createDoc('todos', form[name]);
     resetForm();
   };
 
