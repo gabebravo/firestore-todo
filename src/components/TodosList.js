@@ -13,8 +13,8 @@ export default function TodosList({ todos }) {
     todos.map(({ id, task, isComplete }) => (
       <StyledTodo key={id} isComplete={isComplete}>
         {task}
-        <StyledIcon className="fas fa-edit" />
         <StyledIcon className="far fa-check-square" />
+        <StyledIcon className="far fa-trash-alt" />
       </StyledTodo>
     ));
 
