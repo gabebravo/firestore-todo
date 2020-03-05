@@ -1,5 +1,6 @@
 import React from 'react';
 import TodoForm from '../../components/TodoForm';
+import FilterBar from '../../components/FilterBar';
 import TodosList from '../../components/TodosList';
 import { FirebaseContext } from '../../components/FirebaseWrapper';
 
@@ -16,6 +17,7 @@ export default function Page2() {
         </div>
         <div className="column column-20"></div>
         <div className="column column-50">
+          <FilterBar />
           <TodosList todos={todos} />
         </div>
       </div>

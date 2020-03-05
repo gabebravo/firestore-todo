@@ -29,7 +29,7 @@ export const useFsQuery = collection => {
     };
     fetchData();
     return () => db.unsubscribe();
-  }, []);
+  }, [collection]);
 
   return { todos };
 };
