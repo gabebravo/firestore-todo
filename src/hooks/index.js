@@ -21,14 +21,15 @@ export const useFsQuery = collection => {
   const db = firebase.firestore();
 
   React.useEffect(() => {
-    const fetchData = async () => {
-      await db.collection(collection).onSnapshot(snap => {
+    let query;
+    const fetchData = () => {
+      query = db.collection(collection).onSnapshot(snap => {
         const newTodos = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         setTodos(newTodos);
       });
     };
     fetchData();
-    return () => db.unsubscribe();
+    return () => query();
   }, [db, collection]);
 
   const whereQuerying = (field, comporator, value) => {
