@@ -31,18 +31,18 @@ export const useFsQuery = collection => {
     return () => db.unsubscribe();
   }, [db, collection]);
 
-  const whereQuerying = async (field, comporator, value) => {
-    const query = await db
+  const whereQuerying = (field, comporator, value) => {
+    const query = db
       .collection(collection)
       .where(field, comporator, value)
       .get()
-      .then(async snap => {
+      .then(snap => {
         if (snap.empty) {
           console.log('No matching documents.');
           return;
         }
 
-        const newTodos = await snap.docs.map(doc => ({
+        const newTodos = snap.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
         }));
@@ -54,12 +54,12 @@ export const useFsQuery = collection => {
     return query;
   };
 
-  const getAllDocs = async () => {
-    const query = await db
+  const getAllDocs = () => {
+    const query = db
       .collection(collection)
       .get()
-      .then(async snap => {
-        const newTodos = await snap.docs.map(doc => ({
+      .then(snap => {
+        const newTodos = snap.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
         }));
