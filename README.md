@@ -1,5 +1,14 @@
 ### App Notes
 
+**Create data model:**
+
+```
+{
+  task: string,
+  isComplete: boolean
+}
+```
+
 **Create firebase file: ./src/firebase/index.js**  
 Get the values below from the Firebase dashboard
 
