@@ -1,5 +1,23 @@
 ### App Notes
 
+**Create firebase file: ./src/firebase/index.js**  
+Get the values below from the Firebase dashboard
+
+```
+import firebase from 'firebase';
+
+const config = {
+  apiKey: *************
+  authDomain: *************,
+  databaseURL: *************,
+  projectId: *************',
+  storageBucket: *************,
+  messagingSenderId: *************,
+  appId: *************
+};
+export default firebase.initializeApp(config);
+```
+
 **Import Links:**  
 [Querying Examples](https://github.com/firebase/snippets-node/blob/750ec38af43b8f35d3dea39ab38fc839d06d40d5/firestore/main/index.js#L583-L597)  
 [Firebase Fetch Hook](https://github.com/satansdeer/react-firebase/blob/master/src/App.js)  
