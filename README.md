@@ -1,6 +1,6 @@
 ### App Notes
 
-Import Link:  
+**Import Links:**  
 [Querying Examples](https://github.com/firebase/snippets-node/blob/750ec38af43b8f35d3dea39ab38fc839d06d40d5/firestore/main/index.js#L583-L597)  
 [Firebase Fetch Hook](https://github.com/satansdeer/react-firebase/blob/master/src/App.js)  
 [Get vs Snapshot](https://stackoverflow.com/questions/54479892/difference-between-get-and-snapshot-in-cloud-firestore)
