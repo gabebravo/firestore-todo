@@ -18,9 +18,9 @@ export function useForm(name, value) {
 
 export const useFsQuery = collection => {
   const [todos, setTodos] = React.useState([]);
+  const db = firebase.firestore();
 
   React.useEffect(() => {
-    const db = firebase.firestore();
     const fetchData = async () => {
       await db.collection(collection).onSnapshot(snap => {
         const newTodos = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
@@ -31,7 +31,32 @@ export const useFsQuery = collection => {
     return () => db.unsubscribe();
   }, [collection]);
 
-  return { todos };
+  const whereQuerying = async (field, comporator, value) => {
+    await db
+      .collection(collection)
+      .where(field, comporator, value)
+      .get()
+      .then(async snap => {
+        if (snap.empty) {
+          console.log('No matching documents.');
+          return;
+        }
+
+        const newTodos = await snap.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setTodos(newTodos);
+      })
+      .catch(err => {
+        console.log('Error getting documents', err);
+      });
+    // [END get_multiple]
+    console.log('todos', todos);
+    return todos;
+  };
+
+  return { todos, whereQuerying };
 };
 
 export const useFsMethods = collection => {
