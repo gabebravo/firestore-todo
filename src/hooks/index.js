@@ -29,7 +29,7 @@ export const useFsQuery = collection => {
     };
     fetchData();
     return () => db.unsubscribe();
-  }, [collection]);
+  }, [db, collection]);
 
   const whereQuerying = async (field, comporator, value) => {
     const query = await db
