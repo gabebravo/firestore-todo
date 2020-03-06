@@ -1,11 +1,8 @@
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### App Notes
 
-### `yarn eject`
+Import Link:  
+[Querying Examples](https://github.com/firebase/snippets-node/blob/750ec38af43b8f35d3dea39ab38fc839d06d40d5/firestore/main/index.js#L583-L597)  
+[Firebase Fetch Hook](https://github.com/satansdeer/react-firebase/blob/master/src/App.js)  
+[Get vs Snapshot](https://stackoverflow.com/questions/54479892/difference-between-get-and-snapshot-in-cloud-firestore)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+If you look in the hooks folder, you will find 2 custom hooks : useFsQuery, useFsMethods. useFsQuery both fetches all docs as a snapshot and exposes some querying methods that allow the user to manually trigger certain queries to update the snapshot reads. useFsMethods exposes both the CRUD operations for the DB as well as some auth methods.
