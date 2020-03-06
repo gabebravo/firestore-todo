@@ -32,7 +32,7 @@ export const useFsQuery = collection => {
   }, [collection]);
 
   const whereQuerying = async (field, comporator, value) => {
-    await db
+    const query = await db
       .collection(collection)
       .where(field, comporator, value)
       .get()
@@ -51,12 +51,27 @@ export const useFsQuery = collection => {
       .catch(err => {
         console.log('Error getting documents', err);
       });
-    // [END get_multiple]
-    console.log('todos', todos);
-    return todos;
+    return query;
   };
 
-  return { todos, whereQuerying };
+  const getAllDocs = async () => {
+    const query = await db
+      .collection(collection)
+      .get()
+      .then(async snap => {
+        const newTodos = await snap.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setTodos(newTodos);
+      })
+      .catch(err => {
+        console.log('Error getting documents', err);
+      });
+    return query;
+  };
+
+  return { todos, whereQuerying, getAllDocs };
 };
 
 export const useFsMethods = collection => {

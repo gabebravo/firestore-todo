@@ -10,7 +10,7 @@ const StyledButton = styled.button`
 `;
 
 export default function FilterBar() {
-  const { whereQuerying } = React.useContext(FirebaseContext);
+  const { whereQuerying, getAllDocs } = React.useContext(FirebaseContext);
 
   const completedQuery = async () => {
     await whereQuerying('isComplete', '==', true);
@@ -18,10 +18,9 @@ export default function FilterBar() {
   const activeQuery = async () => {
     await whereQuerying('isComplete', '==', false);
   };
-  // const allQuery = async () => {
-  //   const result = await whereQuerying('isComplete');
-  //   console.log('result', result);
-  // };
+  const allDocsQuery = async () => {
+    await getAllDocs();
+  };
 
   return (
     <div className="row">
@@ -31,7 +30,9 @@ export default function FilterBar() {
       <StyledButton onClick={activeQuery} className="button button-clear">
         Active
       </StyledButton>
-      <StyledButton className="button button-clear">All</StyledButton>
+      <StyledButton onClick={allDocsQuery} className="button button-clear">
+        All
+      </StyledButton>
     </div>
   );
 }
